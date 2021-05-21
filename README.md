@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## [Task](https://www.notion.so/resumeio/Lead-Backend-Engineer-Challendge-95f1574344d84437ba978b21832cd162)
+## Setup
+Run PG via docker, or edit database.yml
+```
+docker run --rm --name pg-docker -e POSTGRES_PASSWORD=docker -d -p 5432:5432 -v $HOME/docker/volumes/postgres:/var/lib/postgresql/data postgres
+```
+Install dependencies and setup DB
+```
+bundle && rails db:setup
+```
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Run server
+```
+rails s
+```
