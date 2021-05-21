@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get '/:post_slug/', to: 'posts#show', as: :parent_post
+  get '/:post_slug/:subpost_slug', to: 'posts#show', as: :child_post
 end

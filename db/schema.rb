@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_05_21_094316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "posts", force: :cascade do |t|
+    t.string "slug", limit: 128, null: false
+    t.string "parent_slug", limit: 128
+    t.jsonb "toc_settings", default: {}, null: false
+    t.string "title", limit: 128, null: false
+    t.text "content", default: "", null: false
+    t.boolean "published", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parent_slug", "slug"], name: "index_posts_on_parent_slug_and_slug"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  add_foreign_key "posts", "posts", column: "parent_slug", primary_key: "slug"
 end

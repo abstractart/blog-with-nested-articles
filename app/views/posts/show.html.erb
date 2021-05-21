@@ -1,0 +1,24 @@
+<h1><%= @post.title %></h1>
+<h2>Table of contents</h2>
+
+<ul>
+<% @toc.sections.each do |section| %>
+  <% if section != Toc::DEFAULT_SECTION  && @toc.posts_by_sections[section].size > 0 %>
+    <p><%= section %></p>
+  <% end %>
+  <ul>
+    <% @toc.posts_by_sections[section].each do |item| %>
+      <li>
+        <%= link_to(item[:name], child_post_path(post_slug: item[:parent_slug], subpost_slug: item[:slug])) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+</ul>
+
+<h2>Content</h2>
+<p><%= @post.content %></p>
+
+<% if @post.parent_slug %>
+  <p><%= link_to("Return to parent", parent_post_path(post_slug: @post.parent_slug)) %></p>
+<% end %>
