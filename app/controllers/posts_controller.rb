@@ -6,7 +6,7 @@ class PostsController < ApplicationController
     @toc = Toc.build(@post)
 
     if subpost_slug
-      @post = Post.published.with_parent(post_slug).find_by_slug!(subpost_slug)
+      @post = @post.subposts.published.find_by_slug!(subpost_slug)
     end
   end
 end

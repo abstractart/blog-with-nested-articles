@@ -13,7 +13,7 @@ class Toc
 
     sections << DEFAULT_SECTION
 
-    subposts = Post.published.with_parent(post.slug).pluck(:slug, :title).to_h
+    subposts = post.subposts.published.pluck(:slug, :title).to_h
 
     current_section = DEFAULT_SECTION
     post.toc_settings["contents"].each do |item|
